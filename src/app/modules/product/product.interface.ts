@@ -7,4 +7,5 @@ export type TProduct = {
   image: string;
   brand: string;
   stock: number;
+  isDeleted: boolean;
 };

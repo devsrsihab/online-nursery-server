@@ -21,8 +21,20 @@ const getSingleProductFromDB = async (id: string) => {
 };
 
 // update
-const updateToDB = async (id: string, payload: TProduct) => {
+const updateProductToDB = async (id: string, payload: TProduct) => {
   const result = await Product.findByIdAndUpdate({ _id: id }, payload, { new: true });
+  return result;
+};
+
+// delete
+const deleteProductFromDB = async (id: string) => {
+  const result = await Product.findByIdAndUpdate(
+    id,
+    {
+      isDeleted: true,
+    },
+    { new: true },
+  );
   return result;
 };
 
@@ -30,5 +42,6 @@ export const ProductServices = {
   createProductToDB,
   getAllProductFromDB,
   getSingleProductFromDB,
-  updateToDB,
+  updateProductToDB,
+  deleteProductFromDB,
 };

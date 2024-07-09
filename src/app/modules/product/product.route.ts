@@ -16,6 +16,12 @@ router.get('/', Controllers.getAllProduct);
 // get single
 router.get('/:id', Controllers.getSingleProduct);
 // update
-router.patch('/:id', validateRequest(Validation.UpdateProductSchemaValidation), Controllers.update);
+router.patch(
+  '/:id',
+  validateRequest(Validation.UpdateProductSchemaValidation),
+  Controllers.updateProduct,
+);
+// delete
+router.delete('/:id', Controllers.deleteProduct);
 
 export const ProductRoute = router;
