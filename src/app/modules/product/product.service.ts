@@ -1,3 +1,5 @@
+import QueryBuilder from '../../builder/QueryBuilder';
+import { courseSearchAbleFields } from '../course/course.constant';
 import { TProduct } from './product.interface';
 import { Product } from './product.model';
 
@@ -8,15 +10,19 @@ const createProductToDB = async (payload: TProduct) => {
 };
 
 // get all
-const getAllProductFromDB = async () => {
-  const result = await Product.find();
+const getAllProductFromDB = async (query: Record<string, unknown>) => {
+  const productQuery = new QueryBuilder(Product.find(), query)
+    .search(courseSearchAbleFields)
+    .filter()
+    .sort()
+    .paginate();
+  const result = await productQuery.modelQuery;
   return result;
 };
 
 // get single
 const getSingleProductFromDB = async (id: string) => {
   const result = await Product.findById(id);
-  console.log(id);
   return result;
 };
 
