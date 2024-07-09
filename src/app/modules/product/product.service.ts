@@ -1,33 +1,34 @@
-import { TInterface } from './product.interface';
-import { ModelSchema } from './product.model';
+import { TProduct } from './product.interface';
+import { Product } from './product.model';
 
 // create
-const createToDB = async (payload: TInterface) => {
-  const result = await ModelSchema.create(payload);
+const createProductToDB = async (payload: TProduct) => {
+  const result = await Product.create(payload);
   return result;
 };
 
 // get all
-const getAllFromDB = async () => {
-  const result = await ModelSchema.find();
+const getAllProductFromDB = async () => {
+  const result = await Product.find();
   return result;
 };
 
 // get single
-const getSingleFromDB = async (id: string) => {
-  const result = await ModelSchema.findById(id);
+const getSingleProductFromDB = async (id: string) => {
+  const result = await Product.findById(id);
+  console.log(id);
   return result;
 };
 
 // update
-const updateToDB = async (id: string, payload: TInterface) => {
-  const result = await ModelSchema.findByIdAndUpdate({ _id: id }, payload, { new: true });
+const updateToDB = async (id: string, payload: TProduct) => {
+  const result = await Product.findByIdAndUpdate({ _id: id }, payload, { new: true });
   return result;
 };
 
-export const Services = {
-  createToDB,
-  getAllFromDB,
-  getSingleFromDB,
+export const ProductServices = {
+  createProductToDB,
+  getAllProductFromDB,
+  getSingleProductFromDB,
   updateToDB,
 };

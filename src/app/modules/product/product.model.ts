@@ -1,12 +1,43 @@
 import { Schema, model } from 'mongoose';
-import { TInterface } from './product.interface';
+import { TProduct } from './product.interface';
 
-const modelSchema = new Schema<TInterface>(
+const productSchema = new Schema<TProduct>(
   {
-    name: {
+    title: {
       type: String,
-      required: [true, 'Name is required'],
+      required: true,
       trim: true,
+    },
+    price: {
+      type: Number,
+      required: true,
+    },
+    description: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    brand: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    category: {
+      type: String,
+      required: true,
+      trim: true,
+    },
+    image: {
+      type: String,
+      required: true,
+    },
+    rating: {
+      type: Number,
+      required: true,
+    },
+    stock: {
+      type: Number,
+      required: true,
     },
   },
   {
@@ -15,4 +46,4 @@ const modelSchema = new Schema<TInterface>(
 );
 
 // make model
-export const ModelSchema = model<TInterface>('ModelSchema', modelSchema);
+export const Product = model<TProduct>('Product', productSchema);

@@ -1,40 +1,40 @@
 import httpStatus from 'http-status';
 import catchAsync from '../../utils/catchAsync';
 import sendResponse from '../../utils/sendResponse';
-import { Services } from './product.service';
+import { ProductServices } from './product.service';
 
 // create
-const create = catchAsync(async (req, res) => {
-  const result = await Services.createToDB(req.body);
+const createProduct = catchAsync(async (req, res) => {
+  const result = await ProductServices.createProductToDB(req.body);
 
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: ' created successfully',
+    message: 'Product created successfully',
     data: result,
   });
 });
 
 // get all
-const getAll = catchAsync(async (req, res) => {
-  const result = await Services.getAllFromDB();
+const getAllProduct = catchAsync(async (req, res) => {
+  const result = await ProductServices.getAllProductFromDB();
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: 'Retrive successfully',
+    message: 'Retrive Products successfully',
     data: result,
   });
 });
 
 // single
-const getSingle = catchAsync(async (req, res) => {
-  const { facultyId } = req.params;
+const getSingleProduct = catchAsync(async (req, res) => {
+  const { id } = req.params;
 
-  const result = await Services.getSingleFromDB(facultyId);
+  const result = await ProductServices.getSingleProductFromDB(id);
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
-    message: ' Single Data get successfully',
+    message: 'Get Product successfully',
     data: result,
   });
 });
@@ -43,7 +43,7 @@ const getSingle = catchAsync(async (req, res) => {
 const update = catchAsync(async (req, res) => {
   const { facultyId } = req.params;
   const updateAbleData = req.body;
-  const result = await Services.updateToDB(facultyId, updateAbleData);
+  const result = await ProductServices.updateToDB(facultyId, updateAbleData);
   sendResponse(res, {
     statusCode: httpStatus.OK,
     success: true,
@@ -53,8 +53,8 @@ const update = catchAsync(async (req, res) => {
 });
 
 export const Controllers = {
-  create,
-  getAll,
-  getSingle,
+  createProduct,
+  getAllProduct,
+  getSingleProduct,
   update,
 };

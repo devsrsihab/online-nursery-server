@@ -5,16 +5,17 @@ import { Controllers } from './product.controller';
 
 const router = express.Router();
 
-// create 
+// create
 router.post(
-  '/create-academic-faculty',
-  validateRequest(Validation.CreateSchemaValidation),
-  Controllers.create,
+  '/',
+  validateRequest(Validation.CreateProductSchemaValidation),
+  Controllers.createProduct,
 );
-// get all 
-router.get('/', Controllers.getAll);
-// get single 
-router.get('/:Id', Controllers.getSingle);
-// update 
-router.patch('/:Id', validateRequest(Validation.UpdateSchemaValidation), Controllers.update);
-export const Route = router;
+// get all
+router.get('/', Controllers.getAllProduct);
+// get single
+router.get('/:id', Controllers.getSingleProduct);
+// update
+router.patch('/:id', validateRequest(Validation.UpdateProductSchemaValidation), Controllers.update);
+
+export const ProductRoute = router;
