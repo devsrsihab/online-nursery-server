@@ -30,7 +30,7 @@ class QueryBuilder<T> {
   filter() {
     const queryObj = { ...this.query };
     // exlude files
-    const excludeFields = ['searchTerm', 'sort', 'limit', 'page',];
+    const excludeFields = ['searchTerm', 'sort', 'limit', 'page'];
     excludeFields.forEach((fiels) => delete queryObj[fiels]);
     this.modelQuery = this.modelQuery.find(queryObj as FilterQuery<T>);
 
@@ -47,10 +47,10 @@ class QueryBuilder<T> {
 
   // paginate
   paginate() {
-    // default values
-    const page = Number(this?.query?.page) || 1;
-    const limit = Number(this?.query?.limit) || 10;
+    const page = Math.max(Number(this?.query?.page), 1) || 1; // Ensure page is at least 1
+    const limit = Math.max(Number(this?.query?.limit), 1) || 10; // Ensure limit is at least 1
     const skip = (page - 1) * limit;
+
     this.modelQuery = this.modelQuery.skip(skip).limit(limit);
 
     return this;
@@ -64,5 +64,4 @@ class QueryBuilder<T> {
   }
 }
 
-
-export default QueryBuilder
+export default QueryBuilder;

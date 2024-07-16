@@ -29,7 +29,6 @@ const getAllProduct = catchAsync(async (req, res) => {
 // single
 const getSingleProduct = catchAsync(async (req, res) => {
   const { id } = req.params;
-
   const result = await ProductServices.getSingleProductFromDB(id);
   sendResponse(res, {
     statusCode: httpStatus.OK,

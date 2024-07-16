@@ -1,5 +1,5 @@
 import QueryBuilder from '../../builder/QueryBuilder';
-import { courseSearchAbleFields } from '../course/course.constant';
+import { courseSearchAbleFields } from './product.constant';
 import { TProduct } from './product.interface';
 import { Product } from './product.model';
 
@@ -11,18 +11,25 @@ const createProductToDB = async (payload: TProduct) => {
 
 // get all
 const getAllProductFromDB = async (query: Record<string, unknown>) => {
-  const productQuery = new QueryBuilder(Product.find(), query)
+  // Count total products
+  const totalItems = await Product.countDocuments({ isDeleted: false });
+
+  const productQuery = new QueryBuilder(Product.find({ isDeleted: false }), query)
     .search(courseSearchAbleFields)
     .filter()
     .sort()
     .paginate();
-  const result = await productQuery.modelQuery;
-  return result;
+  const products = await productQuery.modelQuery;
+  return {
+    totalItems,
+    products,
+  };
 };
 
 // get single
 const getSingleProductFromDB = async (id: string) => {
   const result = await Product.findById(id);
+  console.log('single product service id', id);
   return result;
 };
 
