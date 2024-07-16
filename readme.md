@@ -34,7 +34,7 @@ This server application is part of the Online Tree Nursery project. It is built 
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/online-tree-nursery.git
+   git clone git@github.com:devsrsihab/online-nursery-server.git
    cd online-tree-nursery
    ```
 
